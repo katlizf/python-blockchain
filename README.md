@@ -1,0 +1,1 @@
+Learning and practicing Python by building a blockchain and cryptocurrency app.
