@@ -13,6 +13,21 @@ participants = {'Katie'}
 def hash_block(block):
     return '-'.join([str(block[key]) for key in block])
 
+
+def get_balance(participant):
+    tx_sender = [[tx['amount'] for tx in block['transactions'] if tx['sender'] == participant] for block in blockchain]
+    amount_sent = 0
+    for tx in tx_sender:
+        if len(tx) > 0:
+            amount_sent += tx[0]
+    tx_recipient = [[tx['amount'] for tx in block['transactions'] if tx['recipient'] == participant] for block in blockchain]
+    amount_received = 0
+    for tx in tx_recipient:
+        if len(tx) > 0:
+            amount_received += tx[0]
+    return amount_received - amount_sent
+
+
 def get_last_blockchain_value():
     """Returns the last value of the current blockchain."""
     if len(blockchain) < 1:
@@ -20,7 +35,7 @@ def get_last_blockchain_value():
     return blockchain[-1]
 
 
-def add_transaction(recipient, sender = owner, amount=1.0):
+def add_transaction(recipient, sender=owner, amount=1.0):
     """Append a new value as well as the last blockchain value to the blockchain.
 
     Argumments:
@@ -50,6 +65,7 @@ def mine_block():
         'transactions': open_transactions
     }
     blockchain.append(block)
+    return True
 
 
 def get_transaction_value():
@@ -77,7 +93,7 @@ def print_blockchain_elements():
 
 def verify_chain():
     """Compare a stored hashed in a given block with the recalucaled hash of the previous block."""
-    #Enumerate will give you back a typle which contains the index of the element and the element itself.
+    #Enumerate will give you back a tuple which contains the index of the element and the element itself.
     for (index, block) in enumerate(blockchain):
         if index == 0:
             continue
@@ -109,7 +125,8 @@ while waiting_for_input:
         add_transaction(recipient, amount=amount)
         print(open_transactions)
     elif user_choice == '2':
-        mine_block()
+        if mine_block():
+            open_transactions = []
     elif user_choice == '3':
         print_blockchain_elements()
     elif user_choice == '4':
@@ -129,6 +146,7 @@ while waiting_for_input:
         print_blockchain_elements()
         print('Invalid blockchain!')
         break
+    print(get_balance('Katie'))
 #Else statement only executes once the loop is done. It's outside the loop by lack of indetation.
 else:
     print('User left!')
