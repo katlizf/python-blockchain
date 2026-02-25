@@ -59,3 +59,25 @@ while len(names) >= 1:
     names.pop()
 
 print(names)
+
+
+#Create a list of "person" dictionaries with a name, age and list of hobbies for each person.
+persons = [{'name': 'Katie', 'age': 34, 'hobbies': ['walking', 'cooking']}, {'name': 'John', 'age': 28, 'hobbies': ['reading', 'gaming']}, {'name': 'Sarah', 'age': 22, 'hobbies': ['painting', 'dancing']}]
+
+
+#Use a list comprehension to convert this list of persons into a list of names.
+person_names = [person['name'] for person in persons]
+
+
+#Use a list comprehension to check whether all persons are older than 20.
+all([person['age'] > 20 for person in persons])
+
+
+#Copy a person list such that you can safely edit the name of the first person (without changing the original list).
+copied_person_list = [person.copy() for person in persons]
+
+# Unpack the persons of the original list into different variables and output these variables.
+person1, person2, person3 = persons
+print(person1)
+print(person2)
+print(person3)
