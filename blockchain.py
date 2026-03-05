@@ -179,7 +179,7 @@ while waiting_for_input:
         print_blockchain_elements()
         print('Invalid blockchain!')
         break
-    print(get_balance('Katie'))
+    print('Balance of {}: {:6.2f}'.format('Katie', get_balance('Katie')))
 #Else statement only executes once the loop is done. It's outside the loop by lack of indetation.
 else:
     print('User left!')
