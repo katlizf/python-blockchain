@@ -76,8 +76,30 @@ all([person['age'] > 20 for person in persons])
 #Copy a person list such that you can safely edit the name of the first person (without changing the original list).
 copied_person_list = [person.copy() for person in persons]
 
+
 # Unpack the persons of the original list into different variables and output these variables.
 person1, person2, person3 = persons
 print(person1)
 print(person2)
 print(person3)
+
+
+#Write a normal functin that accepts another function as an argument. Output the results of that other function in your "normal" function.
+def normal_function(func):
+    print(func(8))
+
+
+#Call your "normal" function by passing a lambda function- which performs any operation of your choice- as an argument.
+normal_function(lambda num : num/5)
+
+
+#Tweak your normal function by allowing an infinite amount of arguments on which your lambda function will be executed.
+def normal_function2(func, *args):
+    for arg in args:
+        print(func(arg))
+
+
+#Format the output of your "normal" function such that numbers look nice and are centered in a 20 character column.
+def normal_function3(func, *args):
+    for arg in args:
+        print('Result: {:^20.2f}'.format(func(arg)))
