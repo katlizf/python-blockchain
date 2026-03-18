@@ -1,4 +1,6 @@
 import functools
+import hashlib
+import json
 #Reward given to miners for creating a new block
 MINING_REWARD = 10
 
@@ -22,7 +24,9 @@ def hash_block(block):
 
     Arguments:
         :block: The block that should be hashed. """
-    return '-'.join([str(block[key]) for key in block])
+    #Use json.dumps to turn the block into a string before encoding it to bytes. Use hexdigest to turn a byte hash into a string hash.
+    return hashlib.sha256(json.dumps(block).encode()).hexdigest()
+    
 
 
 def get_balance(participant):
