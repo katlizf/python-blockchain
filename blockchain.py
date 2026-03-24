@@ -7,7 +7,8 @@ MINING_REWARD = 10
 genesis_block = {
     'previous_hash': '',
     'index': 0,
-    'transactions': []
+    'transactions': [],
+    'proof': 100
 }
 #Initializing empty blockchain list
 blockchain = [genesis_block]
@@ -105,6 +106,7 @@ def mine_block():
     last_block = blockchain[-1]
     #Hash the last block to be able to compare it to the stored hash value
     hashed_block = hash_block(last_block)
+    proof = proof_of_work()
     #Reward miners
     reward_transaction = {
         'sender': 'MINING',
@@ -118,7 +120,8 @@ def mine_block():
         'previous_hash': hashed_block,
         #Index not necessary but can add more metadata.
         'index': len(blockchain),
-        'transactions': copied_transactions
+        'transactions': copied_transactions,
+        'proof': proof
     }
     blockchain.append(block)
     return True
