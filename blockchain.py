@@ -19,6 +19,12 @@ owner = 'Katie'
 participants = {'Katie'}
 
 
+def valid_proof(transactions, last_hash, proof):
+    guess = (str(transactions) + str(last_hash) + str(proof)).encode()
+    guess_hash = hashlib.sha256(guess)
+    print(guess_hash)
+    return guess_hash[0:2] == '00'
+
 def hash_block(block):
     """Hashes a block and returns a string representation of it.
 
