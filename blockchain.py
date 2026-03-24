@@ -32,7 +32,6 @@ def hash_block(block):
 def valid_proof(transactions, last_hash, proof):
     guess = (str(transactions) + str(last_hash) + str(proof)).encode()
     guess_hash = hashlib.sha256(guess).hexdigest()
-    print(guess_hash)
     return guess_hash[0:2] == '00'
 
 
@@ -158,6 +157,8 @@ def verify_chain():
             continue
         #Recaulating the hash of the last block and comparing it with the prevously stored hash.
         if block['previous_hash'] != hash_block(blockchain[index - 1]):
+            return False
+        if not valid_proof(block['transactions'][:-1], block['previous_hash'], block['proof']):
             return False
     return True
 
