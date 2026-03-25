@@ -1,7 +1,9 @@
 import functools
 import hashlib
-import json
 from collections import OrderedDict
+
+from hash_util import hash_string_256, hash_block
+
 #Reward given to miners for creating a new block
 MINING_REWARD = 10
 
@@ -21,18 +23,9 @@ owner = 'Katie'
 participants = {'Katie'}
 
 
-def hash_block(block):
-    """Hashes a block and returns a string representation of it.
-
-    Arguments:
-        :block: The block that should be hashed. """
-    #Use json.dumps to turn the block into a string before encoding it to bytes. Use hexdigest to turn a byte hash into a string hash.
-    return hashlib.sha256(json.dumps(block, sort_keys=True).encode()).hexdigest()
-
-
 def valid_proof(transactions, last_hash, proof):
     guess = (str(transactions) + str(last_hash) + str(proof)).encode()
-    guess_hash = hashlib.sha256(guess).hexdigest()
+    guess_hash = hash_string_256(guess)
     return guess_hash[0:2] == '00'
 
 
