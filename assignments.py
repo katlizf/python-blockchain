@@ -103,3 +103,16 @@ def normal_function2(func, *args):
 def normal_function3(func, *args):
     for arg in args:
         print('Result: {:^20.2f}'.format(func(arg)))
+
+
+#Import the random function and generate both a random number between 0 and 1 as well as a random number between 1 and 10.
+import random
+
+random_number_0_1 = random.random()
+random_number_1_10 = random.randint(1, 10)
+
+
+#Use the datetime library together with the random number to generate a random, unique value.
+import datetime
+
+random_unique_value = str(datetime.datetime.now()) + str(random_number_0_1)
